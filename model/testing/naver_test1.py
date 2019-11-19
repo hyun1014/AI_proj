@@ -25,8 +25,8 @@ def tokenize(doc):
 
 
 # Read raw dataset from .txt file
-train_data = read_data("../../ratings_train_shorten.txt")
-test_data = read_data("../../ratings_test_shorten.txt")
+train_data = read_data("../../ratings_train_50K.txt")
+test_data = read_data("../../ratings_test_15K.txt")
 
 if os.path.isfile("train_docs.json"):
     # If train_docs.json exists in current directory, make a list from the json
@@ -69,7 +69,7 @@ pprint(test_text.vocab().most_common(10))
 print(train_text.vocab().most_common(10)[0])
 
 # Only tokens, except result
-selected_words = [f[0] for f in train_text.vocab().most_common(10)]
+selected_words = [f[0] for f in train_text.vocab().most_common(100)]
 print(selected_words)
 
 
@@ -98,12 +98,14 @@ print(train_x)
 print(x_train)
 
 model = models.Sequential()
-model.add(layers.Dense(8, activation='relu', input_shape=(10,)))
-model.add(layers.Dense(8, activation='relu'))
+model.add(layers.Dense(64, activation='relu', input_shape=(100,)))
+model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 
 model.compile(optimizer=optimizers.RMSprop(lr=0.001),
               loss=losses.binary_crossentropy,
               metrics=[metrics.binary_accuracy])
 
-model.fit(x_train, y_train, epochs=10, batch_size=6)
+model.fit(x_train, y_train, epochs=10, batch_size=512)
+result = model.evaluate(x_test,y_test)
+print(result)
