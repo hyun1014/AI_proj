@@ -96,3 +96,14 @@ print(len(x_train))
 
 print(train_x)
 print(x_train)
+
+model = models.Sequential()
+model.add(layers.Dense(5, activation='relu', input_shape=(10,)))
+model.add(layers.Dense(5, activation='relu'))
+model.add(layers.Dense(1, activation='sigmoid'))
+
+model.compile(optimizer=optimizers.RMSprop(lr=0.001),
+              loss=losses.binary_crossentropy(),
+              metrics=[metrics.binary_accuracy])
+
+model.fit(x_train, y_train, epochs=10, batch_size=6)
