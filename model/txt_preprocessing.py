@@ -28,7 +28,6 @@ raw_doc = read_data(target)
 
 # Tokenized words and output result(0 or 1)
 data_set = [[tokenize(doc[1]), doc[2]] for doc in raw_doc]
-print(data_set)
 
 # Make a json file
 file_name = "json_files/" + sys.argv[1] + "_dset.json"
