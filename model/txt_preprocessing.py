@@ -23,7 +23,7 @@ def tokenize(doc):
 
 
 # Read data and put it to raw_doc
-target = "txt_files/" + sys.argv[1]
+target = "txt_files/" + sys.argv[1] + ".txt"
 raw_doc = read_data(target)
 
 # Tokenized words and output result(0 or 1)
@@ -31,6 +31,6 @@ data_set = [[tokenize(doc[1]), doc[2]] for doc in raw_doc]
 print(data_set)
 
 # Make a json file
-file_name = "json_files/" + cur_time + "dset.json"
+file_name = "json_files/" + sys.argv[1] + "_dset.json"
 with open(file_name, "w") as make_file:
     json.dump(data_set, make_file, ensure_ascii=False, indent="  ")
