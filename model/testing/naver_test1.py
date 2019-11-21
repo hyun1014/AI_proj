@@ -7,11 +7,6 @@ import numpy as np
 from keras import models, layers, optimizers, losses, metrics
 
 
-def cutstr(strr):
-    idx = strr.find("/")
-    return strr[0:idx]
-
-
 def read_data(filename):
     with open(filename, 'r') as f:
         data = [line.split('\t') for line in f.read().splitlines()]
@@ -70,7 +65,6 @@ print(train_text.vocab().most_common(10)[0])
 
 # Only tokens, except result
 selected_words = [f[0] for f in train_text.vocab().most_common(100)]
-print(selected_words)
 
 
 # selected_words 안에 있는 word들이 각각 얼마나 나왔나
@@ -85,27 +79,44 @@ test_x = [term_frequency(d) for d, _ in test_docs]
 # y is output (0 or 1), and it is dataset
 train_y = [c for _, c in train_docs]
 test_y = [c for _, c in test_docs]
-print(len(train_x))
 
 # Change x and y to float type data
 x_train = np.asarray(train_x).astype("float32")
 x_test = np.asarray(test_x).astype("float32")
 y_train = np.asarray(train_y).astype("float32")
 y_test = np.asarray(test_y).astype("float32")
-print(len(x_train))
 
-print(train_x)
-print(x_train)
-
+# Initialize model
 model = models.Sequential()
+# Add layers to model. (size of output, activation function, size of input)
 model.add(layers.Dense(64, activation='relu', input_shape=(100,)))
 model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
-
+# Set method of learning and evaluation. (Gradient descent, Error function, Evaluation indecator)
 model.compile(optimizer=optimizers.RMSprop(lr=0.001),
               loss=losses.binary_crossentropy,
               metrics=[metrics.binary_accuracy])
-
-model.fit(x_train, y_train, epochs=10, batch_size=512)
-result = model.evaluate(x_test,y_test)
+# Start learning (Input, Output, number of trial, size of input at once)
+model.fit(x_train, y_train, epochs=20, batch_size=512)
+# Second value is accuracy
+result = model.evaluate(x_test, y_test)
 print(result)
+
+
+def predict_pos(review):
+    token = tokenize(review)
+    tf = term_frequency(token)
+    data = np.expand_dims(np.asarray(tf).astype("float32"), axis=0)
+    score = float(model.predict(data))
+    if score > 0.5:
+        print("{:2f}% for 1".format(score * 100))
+    else:
+        print("{:2f}% for 0".format((1 - score) * 100))
+
+
+predict_pos("아 진짜 개 같아서 못 해먹겠네 시발.")
+predict_pos("기분도 안좋은데 집에 가서 맥주나 마시고 싶다.")
+predict_pos("오늘은 정말 재미없고 지루한 하루였어")
+predict_pos("새벽까지 과제를 하니 정말 즐겁다.")
+predict_pos("오늘도 역시 힘세고 강한 좋은 아침이구나.")
+predict_pos("오늘은 정말 재미있는 하루였어.")
