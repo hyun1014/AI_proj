@@ -54,4 +54,7 @@ c_time = datetime.datetime.now()
 cur_time = c_time.strftime("%Y_%m_%d_%H_%M_%S__")
 model_name = "NLP_model/" + cur_time + "model.h5"
 model.save(model_name)
+# Save selected_word in json file
+with open("NLP_model/selected_word.json", "w") as sf:
+    json.dump(selected_word, sf, ensure_ascii=False)
 print("Model is saved.")
