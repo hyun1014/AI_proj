@@ -1,6 +1,7 @@
 # NUGUMATE_Model
 This reposiotory is for model of NUGUMATE.
 
+
 1. Requirement
 This folder contains txt files which show required python packages to run source codes.
 There are several txt files, and each of their names show date and time when the requirement.txt is created.
