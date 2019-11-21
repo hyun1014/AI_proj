@@ -7,6 +7,7 @@ This reposiotory is for model of NUGUMATE.
 This folder contains txt files which show required python packages to run source codes.
 There are several txt files, and each of their names show date and time when the requirement.txt is created.
 To use this model, the most recent one must be used. All of packages can be installed at once by using a command below.
+*Java must be installed!
 
 pip install -r "Requirement file"
 
