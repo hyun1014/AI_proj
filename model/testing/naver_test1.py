@@ -7,6 +7,7 @@ import numpy as np
 from keras import models, layers, optimizers, losses, metrics
 
 
+
 def read_data(filename):
     with open(filename, 'r') as f:
         data = [line.split('\t') for line in f.read().splitlines()]
