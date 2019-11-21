@@ -1,6 +1,7 @@
 from konlpy.tag import Okt
 import json
 import datetime
+import sys
 
 c_time = datetime.datetime.now()
 cur_time = c_time.strftime("%Y_%m_%d_%H_%M_%S__")
@@ -22,7 +23,7 @@ def tokenize(doc):
 
 
 # Read data and put it to raw_doc
-target = "txt_files/ratings_train_shorten.txt"
+target = "txt_files/" + sys.argv[1]
 raw_doc = read_data(target)
 
 # Tokenized words and output result(0 or 1)
