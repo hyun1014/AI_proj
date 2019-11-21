@@ -33,3 +33,5 @@ data_set = [[tokenize(doc[1]), doc[2]] for doc in raw_doc]
 file_name = "json_files/" + sys.argv[1] + "_dset.json"
 with open(file_name, "w") as make_file:
     json.dump(data_set, make_file, ensure_ascii=False, indent="  ")
+
+print("Preprocessing complete.")

@@ -4,7 +4,7 @@ import nltk
 import datetime
 import numpy as np
 from keras import models, layers, optimizers, losses, metrics
-from keras.models import load_model, save_model
+
 
 target = "json_files/" + sys.argv[1] + ".json"
 # Loading json file
@@ -39,7 +39,7 @@ model = models.Sequential()
 # Add layers to model(Output size, activation function, input size)
 model.add(layers.Dense(64, activation="relu", input_shape=(100,)))
 model.add(layers.Dense(64, activation="relu"))
-model.add(layers.Dense(1, activate="sigmoid"))
+model.add(layers.Dense(1, activation="sigmoid"))
 # Set method of learning and evaluation (Gradient descent, error function, evaluation indicator)
 model.compile(optimizer=optimizers.RMSprop(lr=0.001),
               loss=losses.binary_crossentropy,
@@ -47,9 +47,11 @@ model.compile(optimizer=optimizers.RMSprop(lr=0.001),
 
 # Start learning (Input, output, number of trial, size of input at once
 model.fit(train_x, train_y, epochs=20, batch_size=512)
+print("Learning complete.")
 
 # Save model
 c_time = datetime.datetime.now()
 cur_time = c_time.strftime("%Y_%m_%d_%H_%M_%S__")
 model_name = "NLP_model/" + cur_time + "model.h5"
 model.save(model_name)
+print("Model is saved.")
