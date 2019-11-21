@@ -1,9 +1,7 @@
 import json
 import sys
-import nltk
 import numpy as np
-from keras import utils, datasets, models, layers
-from keras.models import load_model, save_model
+from keras.models import load_model
 
 target_model = "NLP_model/" + sys.argv[1] + ".h5"
 target_json = "json_files/" + sys.argv[2] + ".json"
@@ -32,6 +30,7 @@ test_y = [c for _, c in test_target]
 test_x = np.asarray(test_x).astype("float32")
 test_y = np.asarray(test_y).astype("float32")
 
+# Evaluate model with test dataset
 result = model.evaluate(test_x, test_y)
 test_accuracy = result[1] * 100
 print("Accuracy is {:.2f}%".format(test_accuracy))
