@@ -6,7 +6,7 @@ import numpy as np
 from keras import models, layers, optimizers, losses, metrics
 
 
-target = "json_files/" + sys.argv[1] + ".json"
+target = "json_files/ratings_train_dset.json"
 # Loading json file
 with open(target) as f:
     train_target = json.load(f)
@@ -37,7 +37,7 @@ train_y = np.asarray(train_y).astype("float32")
 # Initialize model
 model = models.Sequential()
 # Add layers to model(Output size, activation function, input size)
-model.add(layers.Dense(64, activation="relu", input_shape=(10000,)))
+model.add(layers.Dense(64, activation="relu", input_shape=(100,)))
 model.add(layers.Dense(64, activation="relu"))
 model.add(layers.Dense(1, activation="sigmoid"))
 # Set method of learning and evaluation (Gradient descent, error function, evaluation indicator)
@@ -46,13 +46,13 @@ model.compile(optimizer=optimizers.RMSprop(lr=0.001),
               metrics=[metrics.binary_accuracy])
 
 # Start learning (Input, output, number of trial, size of input at once
-model.fit(train_x, train_y, epochs=30, batch_size=512)
+model.fit(train_x, train_y, epochs=30, batch_size=1024)
 print("Learning complete.")
 
 # Save model
 c_time = datetime.datetime.now()
 cur_time = c_time.strftime("%Y_%m_%d_%H_%M_%S__")
-model_name = "NLP_model/" + cur_time + "model.h5"
+model_name = "NLP_model/learned_model.h5"
 model.save(model_name)
 # Save selected_word in json file
 with open("NLP_model/selected_word.json", "w") as sf:

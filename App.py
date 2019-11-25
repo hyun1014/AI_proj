@@ -1,6 +1,5 @@
 # flask 관련.
 
-
 from flask import Flask, request
 from pymongo import MongoClient
 import settings
@@ -20,7 +19,7 @@ def Get_Diary():
     paramContents = request.json.get('Contents')
     print("param_id: ", param_id)
     print("paramContents:" , paramContents)
-    result = main_model.predict_pos(paramContents)
+    result = main_model.calculate_sentiment_single_siary(paramContents)
 
     diaries.update_one({'_id': ObjectId(param_id)}, { '$set': {'Sentiment_Analysis': result}})
     return "done"

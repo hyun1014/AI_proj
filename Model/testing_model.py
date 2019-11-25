@@ -3,8 +3,8 @@ import sys
 import numpy as np
 from keras.models import load_model
 
-target_model = "NLP_model/" + sys.argv[1] + ".h5"
-target_json = "json_files/" + sys.argv[2] + ".json"
+target_model = "NLP_model/learned_model.h5"
+target_json = "json_files/ratings_test_dset.json"
 # Load json file for test
 with open(target_json) as f:
     test_target = json.load(f)

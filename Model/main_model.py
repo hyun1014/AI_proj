@@ -5,7 +5,7 @@ from konlpy.tag import Okt
 from keras.models import load_model
 
 parser = Okt()
-target_model = "NLP_model/" + sys.argv[1] + ".h5"
+target_model = "NLP_model/learned_model.h5"
 
 # Load selected_word
 with open("NLP_model/selected_word.json", "r") as sf:
@@ -23,7 +23,7 @@ def term_frequency(doc):
     return [doc.count(word) for word in selected_word]
 
 
-def predict_pos(sent):
+def calculate_sentiment_single_diary(sent):
     tokens = tokenize(sent)
     tf = term_frequency(tokens)
     data = np.expand_dims(np.asarray(tf).astype("float32"), axis=0)
@@ -32,6 +32,3 @@ def predict_pos(sent):
         return 1
     else:
         return 0
-
-
-
