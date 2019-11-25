@@ -28,13 +28,10 @@ def predict_pos(sent):
     tf = term_frequency(tokens)
     data = np.expand_dims(np.asarray(tf).astype("float32"), axis=0)
     score = float(model.predict(data))
-    print("\nTarget sentence: " + sent)
     if score > 0.5:
-        print("긍정일 확률 {:.2f}%\n".format(score * 100))
+        return 1
     else:
-        print("부정일 확률 {:.2f}%\n".format((1 - score) * 100))
+        return 0
 
 
-for i in range(4):
-    test_case = input("Input a sentence.\n")
-    predict_pos(test_case)
+
