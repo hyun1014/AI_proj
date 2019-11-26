@@ -22,6 +22,7 @@ def Get_Diary():
     result = main_model.calculate_sentiment_single_siary(paramContents)
 
     diaries.update_one({'_id': ObjectId(param_id)}, { '$set': {'Sentiment_Analysis': result}})
+print()
     return "done"
 
 
