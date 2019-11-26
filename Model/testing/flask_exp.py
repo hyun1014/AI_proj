@@ -1,35 +1,33 @@
-from flask import Flask, redirect, url_for, request
+# flask 관련.
+
+from flask import Flask, request
+from pymongo import MongoClient
+import settings
+# import main_model
+from flask_cors import CORS, cross_origin
+from bson import ObjectId
+
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/app/*": {"origins": "*"}})
+client = MongoClient(settings.db_url)
+diaries = client.database.diaries
 
 
-@app.route("/admin")
-def hello_admin():
-    return "Hello admin!"
+@app.route('/Get_Diary', methods=['POST'])
+def Get_Diary():
+    """
+    param_id = request.json.get('_id')
+    paramContents = request.json.get('Contents')
+    print("param_id: ", param_id)
+    print("paramContents:" , paramContents)
+    result = main_model.calculate_sentiment_single_siary(paramContents)
+
+    diaries.update_one({'_id': ObjectId(param_id)}, { '$set': {'Sentiment_Analysis': result}})
+    """
+    print("sibural")
+    return "done"
 
 
-@app.route("/guest/<name>")
-def hello_guest(name):
-    return "Hello {}!".format(name)
-
-
-@app.route("/nameis/<name>")
-def hello(name):
-    if name == "admin":
-        return redirect(url_for("hello_admin"))
-    else:
-        return redirect(url_for("hello_guest", name=name))
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        user = request.form["nm"]
-        return redirect(url_for("hello_guest", name=user))
-    else:
-        user = request.args.get("nm")
-        return redirect(url_for("hello_guest", name=user))
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run()

@@ -1,5 +1,4 @@
 import json
-import sys
 import numpy as np
 from konlpy.tag import Okt
 from keras.models import load_model
@@ -15,7 +14,8 @@ model = load_model(target_model)
 
 
 def tokenize(sentence):
-    return [t[0] for t in parser.pos(sentence, norm=True, stem=True)]
+    list = [t[0] for t in parser.pos(sentence, norm=True, stem=True)]
+    return list
 
 
 # selected_word 안에 있는 word들이 각각 얼마나 나왔나
