@@ -46,15 +46,15 @@ model.compile(optimizer=optimizers.RMSprop(lr=0.001),
               metrics=[metrics.binary_accuracy])
 
 # Start learning (Input, output, number of trial, size of input at once
-model.fit(train_x, train_y, epochs=30, batch_size=1024)
+model.fit(train_x, train_y, epochs=100, batch_size=1024)
 print("Learning complete.")
 
 # Save model
 c_time = datetime.datetime.now()
 cur_time = c_time.strftime("%Y_%m_%d_%H_%M_%S__")
-model_name = "NLP_model/learned_model.h5"
+model_name = "NLP_model/learned_model_prototype4_1.h5"
 model.save(model_name)
 # Save selected_word in json file
-with open("NLP_model/selected_word.json", "w") as sf:
+with open("NLP_model/selected_word_prototype4_1.json", "w") as sf:
     json.dump(selected_word, sf, ensure_ascii=False)
 print("Model is saved.")

@@ -32,3 +32,16 @@ def calculate_sentiment_single_diary(sent):
         return 1
     else:
         return 0
+
+
+# This is for test mode. 6 sentences can be evaluated.
+if __name__ == "__main__":
+    print("Test mode\n\n")
+    for i in range (6):
+        sent = input("문장을 입력하세요.\n")
+        res = calculate_sentiment_single_diary(sent)
+        if res==1:
+            print("\n입력 문장: " + sent + "\n긍정적인 감정의 문장입니다.\n")
+        else:
+            print("\n입력 문장: " + sent + "\n부정적인 감정의 문장입니다.\n")
+    print("Test is completed.\n")
