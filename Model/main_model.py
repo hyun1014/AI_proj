@@ -33,15 +33,17 @@ def calculate_sentiment_single_diary(sent):
     else:
         return 0
 
-
+'''
 # This is for test mode. 6 sentences can be evaluated.
+# 평시에는 주석 처리해놓고 테스트 시에만 주석을 해제하고 사용할 것
 if __name__ == "__main__":
     print("Test mode\n\n")
     for i in range (6):
         sent = input("문장을 입력하세요.\n")
         res = calculate_sentiment_single_diary(sent)
         if res==1:
-            print("\n입력 문장: " + sent + "\n긍정적인 감정의 문장입니다.\n")
+            print("->긍정적인 감정의 문장입니다.\n")
         else:
-            print("\n입력 문장: " + sent + "\n부정적인 감정의 문장입니다.\n")
+            print("->부정적인 감정의 문장입니다.\n")
     print("Test is completed.\n")
+'''
