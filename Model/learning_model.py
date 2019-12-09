@@ -16,7 +16,7 @@ train_tokens = [tok for d in train_target for tok in d[0]]
 train_text = nltk.Text(train_tokens, name="train_t")
 
 # Make selected_word <- This is used to make vector
-common_tests = train_text.vocab().most_common(100)
+common_tests = train_text.vocab().most_common(500)
 selected_word = [word[0] for word in common_tests]
 
 
@@ -37,7 +37,7 @@ train_y = np.asarray(train_y).astype("float32")
 # Initialize model
 model = models.Sequential()
 # Add layers to model(Output size, activation function, input size)
-model.add(layers.Dense(64, activation="relu", input_shape=(100,)))
+model.add(layers.Dense(64, activation="relu", input_shape=(500,)))
 model.add(layers.Dense(64, activation="relu"))
 model.add(layers.Dense(1, activation="sigmoid"))
 # Set method of learning and evaluation (Gradient descent, error function, evaluation indicator)
@@ -46,15 +46,15 @@ model.compile(optimizer=optimizers.RMSprop(lr=0.001),
               metrics=[metrics.binary_accuracy])
 
 # Start learning (Input, output, number of trial, size of input at once
-model.fit(train_x, train_y, epochs=100, batch_size=1024)
+model.fit(train_x, train_y, epochs=20, batch_size=1024)
 print("Learning complete.")
 
 # Save model
 c_time = datetime.datetime.now()
 cur_time = c_time.strftime("%Y_%m_%d_%H_%M_%S__")
-model_name = "NLP_model/learned_model_prototype4_1.h5"
+model_name = "NLP_model/learned_model.h5"
 model.save(model_name)
 # Save selected_word in json file
-with open("NLP_model/selected_word_prototype4_1.json", "w") as sf:
+with open("NLP_model/selected_word.json", "w") as sf:
     json.dump(selected_word, sf, ensure_ascii=False)
 print("Model is saved.")
