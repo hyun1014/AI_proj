@@ -16,7 +16,10 @@ def Get_Diary():
     print("param_id: ", param_id)
     print("paramContents:" , paramContents)
     result = main_model.calculate_sentiment_single_diary(paramContents)
-    print(result)
+    if result==1:
+        print("분석 결과 긍정적인 감정입니다.")
+    else:
+        print("분석 결과 부정적인 감정입니다.")
     return jsonify({"result": result})
 
 
