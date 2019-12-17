@@ -32,7 +32,3 @@ This folder contains json files. All of dataset from raw txt files are converted
 This folder contains .h5 file, which is core model of this project. After model is created and executed learning, the model
 is saved in this folder (.h5 file). The model can be loaded in main_model.py. There is also selected_word.json, which is used
 to vectorization of dataset in json file.
-
-3.4 testing
-
-This folder is for testing code, so it is not related with real project.
